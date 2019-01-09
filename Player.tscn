@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://Player.png" type="Texture" id=2]
+[ext_resource path="res://Cannon.tscn" type="PackedScene" id=3]
+
+[node name="Player" type="Node2D" groups=[
+"player",
+]]
+
+script = ExtResource( 1 )
+_sections_unfolded = [ "Visibility" ]
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 2 )
+
+[node name="ShootTimer" type="Timer" parent="." index="1"]
+
+process_mode = 1
+wait_time = 0.3
+one_shot = true
+autostart = false
+
+[node name="Cannons" type="Node2D" parent="." index="2"]
+
+show_behind_parent = true
+_sections_unfolded = [ "Transform" ]
+
+[node name="Cannon" parent="Cannons" index="0" instance=ExtResource( 3 )]
+
+[node name="Cannon2" parent="Cannons" index="1" instance=ExtResource( 3 )]
+
+position = Vector2( -4, 8 )
+rotation = 0.523599
+z_index = -1
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="Cannon3" parent="Cannons" index="2" instance=ExtResource( 3 )]
+
+position = Vector2( -4, -8 )
+rotation = -0.523599
+z_index = -1
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="UpgradeTimer" type="Timer" parent="." index="3"]
+
+process_mode = 1
+wait_time = 15.0
+one_shot = true
+autostart = false
+
+[connection signal="timeout" from="UpgradeTimer" to="." method="_on_UpgradeTimer_timeout"]
+
+
